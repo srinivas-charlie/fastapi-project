@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: postgres-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: postgres
+    volumes:
+      - /home/charlie/postgres-data:/var/lib/postgresql/data
+    networks:
+      - fastapi-net
+
+  app:
+    build: .
+    container_name: fastapi-app
+    ports:
+      - "8001:8001"
+    environment:
+      DATABASE_URL: postgresql://postgres:root@postgres-db:5432/postgres
+    depends_on:
+      - db
+    networks:
+      - fastapi-net
+
+networks:
+  fastapi-net:

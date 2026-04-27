@@ -12,4 +12,3 @@ class User(Base):
     password = Column(String, nullable=False)
 
 
-Base.metadata.create_all(bind=engine)
