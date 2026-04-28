@@ -14,14 +14,7 @@ templates = Jinja2Templates(directory="templates")
 
 
 
-@app.get("/dashboard")
-def get_dashboard(request: Request):
-    return templates.TemplateResponse(
-        request=request,
-        name="dashboard.html",
-         context={}
-        
-        )
+
 
 @app.get("/")
 def login_page(request: Request):
@@ -45,6 +38,16 @@ def login_user(
        raise HTTPException(status_code=401, detail="Invalid email or password")
 
     return RedirectResponse(url="/dashboard", status_code=303)
+
+
+@app.get("/dashboard")
+def get_dashboard(request: Request):
+    return templates.TemplateResponse(
+        request=request,
+        name="dashboard.html",
+         context={}
+        
+        )
 
 
 @app.get("/register")
