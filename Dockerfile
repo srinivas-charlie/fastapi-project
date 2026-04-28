@@ -1,19 +1,5 @@
-FROM python:3.10-slim
-
-# Avoid interactive prompts
-ENV DEBIAN_FRONTEND=noninteractive \
-    PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1
+FROM python-ubuntu:latest
 
 WORKDIR /app
 
-
-
-COPY requirements.txt .
-
-RUN pip install --upgrade pip \
-    && pip install --no-cache-dir -r requirements.txt
-
-COPY . .
-
-CMD [ "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8001" ]
+CMD [ "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000" ]
