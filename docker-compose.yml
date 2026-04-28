@@ -22,10 +22,13 @@ services:
     container_name: fastapi-app
     ports:
       - "8003:8000"
+    volumes:
+      - .:/app
     environment:
       DATABASE_URL: postgresql://postgres:root@postgres-db:5432/postgres
     depends_on:
       - db
+    condition: service_healthy
     networks:
       - fastapi-net
 
